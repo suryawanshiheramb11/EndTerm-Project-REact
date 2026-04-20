@@ -1,0 +1,127 @@
+.summary-container {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease-out;
+}
+
+.summary-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-icon {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    animation: float 4s ease-in-out infinite;
+}
+
+.summary-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+.topic-section {
+    margin-bottom: 2.5rem;
+}
+
+.topic-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.topic-section h2 svg {
+    color: var(--primary);
+}
+
+.topic-section p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.topic-section p strong {
+    color: var(--primary);
+}
+
+.bullet-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.bullet-card {
+    background: var(--bg-surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+}
+
+.bullet-card:hover {
+    transform: translateY(-5px);
+    background: var(--bg-main);
+}
+
+.bullet-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.bullet-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.glow-blue:hover, .glow-violet:hover, .glow-cyan:hover {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.key-takeaway {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(145deg, #FEF2F2, #FFFBEB);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+}
+
+.key-takeaway h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.key-takeaway p {
+    color: black;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin: 0;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

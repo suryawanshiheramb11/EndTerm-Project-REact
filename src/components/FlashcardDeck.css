@@ -1,0 +1,205 @@
+.flashcards-container {
+    padding: 1rem;
+    animation: fadeIn 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flashcards-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.flashcards-header h2 {
+    font-size: 2.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.flashcards-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.deck-controls {
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    margin-bottom: 2rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+}
+
+.card-counter {
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.flashcard-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+}
+
+.nav-arrow {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.nav-arrow:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    border-color: var(--primary);
+}
+
+.scene {
+    width: 450px;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    position: relative;
+    border-radius: 20px;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    transition: var(--transition-smooth);
+}
+
+.card__face--front {
+    background: linear-gradient(145deg, #2D5A47, #1A3A2A);
+}
+
+.card__face--front:hover {
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.card__face--back {
+    background: linear-gradient(145deg, #253A2C, #10B98110);
+    transform: rotateY(180deg);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.card-icon {
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.card-term {
+    font-size: 2rem;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.flip-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: auto;
+    opacity: 0.8;
+}
+
+.definition-header {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.card-definition {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+
+.deck-progress {
+    width: 100%;
+    max-width: 600px;
+    height: 6px;
+    background: #2D5A47;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.4s ease-out;
+}
+
+@media (max-width: 600px) {
+    .scene {
+        width: 100%;
+        height: 350px;
+    }
+
+    .flashcard-wrapper {
+        flex-direction: column;
+    }
+
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-term {
+        font-size: 1.5rem;
+    }
+
+    .card-definition {
+        font-size: 1.05rem;
+    }
+}
