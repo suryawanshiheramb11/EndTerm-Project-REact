@@ -25,7 +25,7 @@ function App() {
     setIsLoading(true);
     setError(null);
 
-    const maxRetries = 3;
+    const maxRetries = 5; // Increased from 3 to 5
     let retryCount = 0;
 
     const attemptGenerate = async () => {
@@ -97,12 +97,18 @@ function App() {
       } catch (err) {
         console.error('Error details:', err);
         
-        // Check if it's a 503 error (service overloaded) - retry
-        if (err.message?.includes('503') && retryCount < maxRetries) {
+        // Check if it's a 503 error or overload error - retry with longer delays
+        const isOverloadError = err.message?.includes('503') || 
+                               err.message?.includes('overloaded') ||
+                               err.message?.includes('RESOURCE_EXHAUSTED') ||
+                               err.message?.includes('429');
+        
+        if (isOverloadError && retryCount < maxRetries) {
           retryCount++;
-          const delayMs = Math.pow(2, retryCount) * 1000; // Exponential backoff: 2s, 4s, 8s
-          console.log(`Retrying in ${delayMs}ms... (Attempt ${retryCount}/${maxRetries})`);
-          setError(`⏳ Server busy. Retrying in ${delayMs / 1000}s... (Attempt ${retryCount}/${maxRetries})`);
+          // More aggressive backoff: 3s, 6s, 12s, 24s, 48s
+          const delayMs = Math.pow(2, retryCount + 1) * 1500;
+          console.log(`API Overloaded. Retrying in ${delayMs / 1000}s... (Attempt ${retryCount}/${maxRetries})`);
+          setError(`⏳ API is busy. Retrying in ${Math.ceil(delayMs / 1000)}s... (Attempt ${retryCount}/${maxRetries})`);
           
           setTimeout(attemptGenerate, delayMs);
           return;
@@ -115,9 +121,9 @@ function App() {
         } else if (err.message?.includes('API_KEY_INVALID')) {
           errorMessage = "❌ Invalid Gemini API key. Check your .env.local file.";
         } else if (err.message?.includes('429')) {
-          errorMessage = "⏱️ API rate limit exceeded. Please wait a moment and try again.";
-        } else if (err.message?.includes('503')) {
-          errorMessage = "🔧 Gemini API is currently overloaded. Please try again in a few moments.";
+          errorMessage = "⏱️ API rate limit exceeded. The app retries automatically. Please wait...";
+        } else if (err.message?.includes('503') || err.message?.includes('overloaded')) {
+          errorMessage = "🔧 Gemini API is currently overloaded. Retrying automatically...";
         } else if (err.message?.includes('401') || err.message?.includes('403')) {
           errorMessage = "🔐 Authentication failed. Check your Gemini API key.";
         } else if (err.message?.includes('RESOURCE_EXHAUSTED')) {
