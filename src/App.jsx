@@ -33,7 +33,7 @@ function App() {
 
       const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
       // Use gemini-2.5-flash which is fast and efficient
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
       const prompt = `Generate comprehensive study materials for the topic: "${topicInput}".
       Return ONLY a valid JSON object with no markdown formatting. The JSON must exactly match this structure:
